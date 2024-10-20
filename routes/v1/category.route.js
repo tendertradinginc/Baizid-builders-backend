@@ -2,15 +2,13 @@ const express = require("express");
 const router = express.Router();
 const categoriesController = require("../../controllers/category.controller");
 
-router
-  .route("/")
-  .get(categoriesController.getAllCategories)
-  .post(categoriesController.createCategories);
+router.route("/").post(categoriesController.createCategories);
 
+// get all for dashbaord
 router
   .route("/get-all-dashboard-edition")
   .get(categoriesController.getAllCategoriesDashboard);
-  
+
 router.route("/toggle-status").get(categoriesController.toggleCategoryStatus);
 
 router

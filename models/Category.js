@@ -9,10 +9,6 @@ const CategorySchema = mongoose.Schema(
       unique: true,
     },
 
-    shortDescription: {
-      type: String,
-    },
-
     img: {
       type: String,
       validate: {
