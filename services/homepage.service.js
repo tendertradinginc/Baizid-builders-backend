@@ -2,7 +2,7 @@ const Banner = require("../models/Banner");
 const Client = require("../models/Client");
 const ClientFeedback = require("../models/ClientFeedback");
 const Project = require("../models/Project");
-const SuccessStory = require("../models/SuccessStory");
+const SuccessStory = require("../models/Product");
 
 exports.getAllSummaryfromDb = async () => {
   const totalClient = await Client.countDocuments({});

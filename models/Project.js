@@ -8,39 +8,48 @@ const ProjectSchema = mongoose.Schema(
       required: true,
     },
 
-    image: {
-      type: String,
-      validate: {
-        validator: (value) =>
-          validator.isURL(value, {
-            protocols: ["http", "https"],
-            require_tld: true,
-            require_protocol: true,
-          }),
+    image: [
+      {
+        type: String,
+        validate: {
+          validator: (value) =>
+            validator.isURL(value, {
+              protocols: ["http", "https"],
+              require_tld: true,
+              require_protocol: true,
+            }),
 
-        message: "Invalid image URL",
+          message: "Invalid image URL",
+        },
+        required: true,
       },
-      required: true,
-    },
+    ],
     shortDescription: {
       type: String,
       required: true,
     },
 
+    subTitle: {
+      type: String,
+      required: true,
+    },
     description: {
       type: String,
       required: true,
     },
-    status: {
-      type: Boolean,
-      required: true,
-      default:false
+    handOverDate: {
+      type: Date,
     },
+
     location: {
       type: String,
     },
     category: {
       type: String,
+    },
+    status: {
+      type: Boolean,
+      default: false,
     },
   },
   {

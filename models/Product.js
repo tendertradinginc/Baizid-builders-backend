@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
-const SuccessStorySchema = mongoose.Schema(
+const ProductSchema = mongoose.Schema(
   {
     clientName: {
       type: String,
@@ -59,5 +59,5 @@ const SuccessStorySchema = mongoose.Schema(
   }
 );
 
-const SuccessStory = mongoose.model("SuccessStory", SuccessStorySchema);
-module.exports = SuccessStory;
+const Product = mongoose.model("Product", ProductSchema);
+module.exports = Product;
