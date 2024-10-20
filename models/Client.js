@@ -7,10 +7,7 @@ const clientSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    description: {
-      type: String,
-      required: false,
-    },
+
     image: {
       type: String,
       validate: {

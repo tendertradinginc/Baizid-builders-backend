@@ -4,7 +4,7 @@ const app = require("./app");
 
 //server
 
-const url = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.nacqp5f.mongodb.net/dcl-eng?retryWrites=true&w=majority&appName=Cluster0`;
+const url = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.nacqp5f.mongodb.net/baizid-builders?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose.connect(url).then(() => {
   console.log("Database Connection successful");

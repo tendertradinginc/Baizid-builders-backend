@@ -58,7 +58,6 @@ exports.getAllServicesDashboardEdition = async (page, limit, search) => {
     const limitNumber = parseInt(limit);
     const result = await Service.find(query)
       .sort({ name: "asc" })
-      .populate("category")
       .limit(limitNumber)
       .skip((pageNumber - 1) * limitNumber);
     const total = await Service.countDocuments(query);
@@ -76,7 +75,7 @@ exports.getAllServicesDashboardEdition = async (page, limit, search) => {
 
 exports.getSingleServiceFromDb = async (id) => {
   try {
-    const result = await Service.findOne({ _id: id }).populate("category");
+    const result = await Service.findOne({ _id: id });
     return result;
   } catch (error) {
     throw new Error(`Failed to get single service: ${error.message}`);
@@ -88,7 +87,7 @@ exports.updateServiceFromDb = async (id, data) => {
     const result = await Service.findByIdAndUpdate(id, data, {
       new: true,
       runValidators: true,
-    }).populate("category");
+    });
     return result;
   } catch (error) {
     throw new Error(`Failed to update service: ${error.message}`);

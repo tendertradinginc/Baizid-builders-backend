@@ -5,11 +5,11 @@ const servicesController = require("../../controllers/service.controller");
 router
   .route("/")
   .get(servicesController.getAllServices)
-  .post(servicesController.createService);
+  .post(servicesController.createService); // create service
 
 router
   .route("/get-all-dashboard-edition")
-  .get(servicesController.getAllServicesDashboard);
+  .get(servicesController.getAllServicesDashboard); // get all for dashboard
 
 router
   .route("/category-wise")

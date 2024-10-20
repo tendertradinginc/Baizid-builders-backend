@@ -20,21 +20,25 @@ const ServiceSchema = mongoose.Schema(
       },
       required: true,
     },
-    category: {
-      type: String,
-      required: true,
-    },
+
     shortDescription: {
       type: String,
-      required: true,
+    },
+    highlightDescription: {
+      type: String,
     },
     fullDescription: {
       type: String,
-      required: true,
+    },
+    subtitle: {
+      type: String,
+    },
+    subtitleDescription: {
+      type: String,
     },
     featuredStatus: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   {
