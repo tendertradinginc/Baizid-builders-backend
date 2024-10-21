@@ -1,23 +1,27 @@
 const Product = require("../models/Product");
 
-exports.createProductsinDb = async (details) => {
-  console.log(details);
-  const result = await Product.create(details);
+exports.createProductsinDb = async (data) => {
+  const result = await Product.create(data);
   return result;
 };
 
-exports.getAllProductsinDb = async (page, limit, search = "") => {
-  const searchTerm =
-    typeof search === "undefined" || search === null ? "" : search;
+exports.getAllProductsFromDb = async (page, limit, search = "", category) => {
+  const searchTerm = search == "undefined" ? "" : search;
+  const categoryTerm = category == "undefined" ? "" : category;
   const regexSearch = new RegExp(searchTerm, "i");
 
   let query = {};
   if (searchTerm) {
     query.$or = [
       { name: { $regex: regexSearch } },
-      { shortDescription: { $regex: regexSearch } },
-      { fullDescription: { $regex: regexSearch } },
+      { model: { $regex: regexSearch } },
+      { brand: { $regex: regexSearch } },
     ];
+  }
+
+   
+   if (categoryTerm) {
+    query.category = categoryTerm; 
   }
 
   const result = await Product.find(query)

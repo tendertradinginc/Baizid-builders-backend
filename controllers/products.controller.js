@@ -1,16 +1,16 @@
 const Product = require("../models/Product");
 const {
   createProductsinDb,
-  getAllProductsinDb,
+  getAllProductsFromDb,
   deleteProductsinDb,
   updateProductsinDb,
+
 } = require("../services/products.service");
 
 //create
 exports.createProducts = async (req, res) => {
   try {
-    console.log(req.body);
-    // make unique user id
+
     const getLast = await Product.find().sort({ _id: -1 }).limit(1);
     const lastid = getLast[0]?.id;
     let id;
@@ -20,6 +20,8 @@ exports.createProducts = async (req, res) => {
       id = 1001;
     }
     const data = { ...req.body, id };
+  
+    
 
     const result = await createProductsinDb(data);
     res.status(201).json({ success: true });
@@ -31,8 +33,8 @@ exports.createProducts = async (req, res) => {
 //get
 exports.getAllProducts = async (req, res) => {
   try {
-    const { page, limit, search } = req.query;
-    const result = await getAllProductsinDb(page, limit, search);
+    const { page, limit, search, category } = req.query;
+    const result = await getAllProductsFromDb(page, limit, search, category);
     res.status(200).json({
       status: "success",
       message: "Successfully get ",
