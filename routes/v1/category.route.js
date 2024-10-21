@@ -9,7 +9,10 @@ router
   .route("/get-all-dashboard-edition")
   .get(categoriesController.getAllCategoriesDashboard);
 
-router.route("/toggle-status").get(categoriesController.toggleCategoryStatus);
+// get all for product category for dashboard
+router
+  .route("/product-category")
+  .get(categoriesController.getAllforProductCategory);
 
 router
   .route("/:id")

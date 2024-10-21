@@ -46,34 +46,9 @@ exports.getAllCategoriesDashboardEdition = async (page, limit, search) => {
 };
 
 // get all categories
-exports.getAllCategoriesFromDb = async (page, limit, featured) => {
-  try {
-    const pageNumber = parseInt(page) || 1;
-    const limitNumber = parseInt(limit) || 10;
-
-    let query = {};
-    if (featured !== undefined) {
-      query.featuredStatus = featured;
-    }
-
-    const result = await Categories.find(query)
-      .sort({ name: "asc" })
-      .limit(limitNumber)
-      .skip((pageNumber - 1) * limitNumber);
-
-    const total = await Categories.countDocuments(query);
-
-    const metadata = {
-      total,
-      page: pageNumber,
-      limit: limitNumber,
-      totalPages: Math.ceil(total / limitNumber),
-    };
-
-    return { result, metadata };
-  } catch (error) {
-    throw new Error(`Failed to get all categories: ${error.message}`);
-  }
+exports.getAllforProductCategoryFromDb = async () => {
+  const total = await Categories.find({ featuredStatus: true });
+  return total;
 };
 
 exports.getSingleCategoryFromdb = async (id) => {
@@ -91,27 +66,4 @@ exports.UpdateCategoryFromdb = async (id, data) => {
 exports.DeleteCategoryFromdb = async (id) => {
   const result = await Categories.deleteOne({ _id: id });
   return result;
-};
-
-exports.changeCategoryStatus = async ({ id }) => {
-  if (!id) {
-    throw new Error("Id required to change status");
-  }
-  try {
-    const category = await Categories.findById(id);
-
-    if (!category) {
-      throw new Error("Category not found");
-    }
-
-    // Toggle the status
-    category.status = !category.status;
-
-    // Save the updated category
-    await category.save();
-
-    return category;
-  } catch (error) {
-    throw new Error(error?.message);
-  }
 };

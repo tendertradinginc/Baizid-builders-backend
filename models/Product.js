@@ -3,35 +3,44 @@ const validator = require("validator");
 
 const ProductSchema = mongoose.Schema(
   {
-    clientName: {
+    name: {
       type: String,
       required: true,
     },
-    clientDesignation: {
+    model: {
+      type: String,
+    },
+    id: {
       type: String,
       required: true,
     },
-    image: {
+    category: {
       type: String,
-      validate: {
-        validator: (value) =>
-          validator.isURL(value, {
-            protocols: ["http", "https"],
-            require_tld: true,
-            require_protocol: true,
-          }),
+    },
+    brand: {
+      type: String,
+    },
+    image: [
+      {
+        type: String,
+        validate: {
+          validator: (value) =>
+            validator.isURL(value, {
+              protocols: ["http", "https"],
+              require_tld: true,
+              require_protocol: true,
+            }),
 
-        message: "Invalid image URL",
+          message: "Invalid image URL",
+        },
+        required: true,
       },
-      required: true,
-    },
-    companyName: {
+    ],
+    warranty: {
       type: String,
-      required: true,
     },
-    projectName: {
+    manufacture: {
       type: String,
-      required: true,
     },
     shortDescription: {
       type: String,
@@ -41,17 +50,10 @@ const ProductSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    location: {
-      type: String,
-      required: true,
-    },
-    handoverDate: {
-      type: Date,
-      required: true,
-    },
-    featuredStatus: {
+
+    status: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   {

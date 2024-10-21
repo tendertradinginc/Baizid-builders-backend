@@ -3,9 +3,8 @@ const {
   getSingleCategoryFromdb,
   UpdateCategoryFromdb,
   DeleteCategoryFromdb,
-  changeCategoryStatus,
   getAllCategoriesDashboardEdition,
-  getAllCategoriesFromDb,
+  getAllforProductCategoryFromDb,
 } = require("../services/category.service");
 
 exports.createCategories = async (req, res) => {
@@ -50,20 +49,14 @@ exports.getAllCategoriesDashboard = async (req, res) => {
   }
 };
 
-exports.getAllCategories = async (req, res) => {
+exports.getAllforProductCategory = async (req, res) => {
   try {
-    const { page = 1, limit = 10, featured } = req.query;
-    const { result, metadata } = await getAllCategoriesFromDb(
-      page,
-      limit,
-      featured
-    );
+    const result = await getAllforProductCategoryFromDb();
 
     res.status(200).json({
       status: "success",
       message: "Successfully retrieved categories",
       data: result,
-      metadata,
     });
   } catch (error) {
     res.status(500).json({
@@ -128,25 +121,6 @@ exports.DeleteSingleCategory = async (req, res, next) => {
     res.status(500).json({
       status: "fail",
       message: "Couldn't  update categories",
-      error: error.message,
-    });
-  }
-};
-
-//* Toggle category status
-exports.toggleCategoryStatus = async (req, res) => {
-  const { id } = req.query;
-
-  try {
-    const result = await changeCategoryStatus({ id });
-    res.status(200).json({
-      status: "success",
-      message: "Successfully changed category status.",
-      data: result,
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: "fail",
       error: error.message,
     });
   }

@@ -1,6 +1,7 @@
 const Product = require("../models/Product");
 
 exports.createProductsinDb = async (details) => {
+  console.log(details);
   const result = await Product.create(details);
   return result;
 };
