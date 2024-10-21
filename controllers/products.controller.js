@@ -4,6 +4,7 @@ const {
   getAllProductsFromDb,
   deleteProductsinDb,
   updateProductsinDb,
+  getSingleProductFromDb,
 
 } = require("../services/products.service");
 
@@ -44,6 +45,25 @@ exports.getAllProducts = async (req, res) => {
     res.status(500).json({
       status: "fail",
       message: "Couldn't  find ",
+      error: error.message,
+    });
+  }
+};
+
+// get single 
+exports.getSingleProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await getSingleProductFromDb(id);
+    res.status(200).json({
+      status: "success",
+      message: "Successfully retrieved service",
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      message: "Couldn't retrieve service",
       error: error.message,
     });
   }

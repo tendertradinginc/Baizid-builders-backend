@@ -34,6 +34,16 @@ exports.getAllProductsFromDb = async (page, limit, search = "", category) => {
   return { result, total };
 };
 
+// get single product
+exports.getSingleProductFromDb = async (id) => {
+  try {
+    const result = await Product.findOne({ _id: id });
+    return result;
+  } catch (error) {
+    throw new Error(`Failed to get single service: ${error.message}`);
+  }
+};
+
 exports.deleteProductsinDb = async (id) => {
   const result = await Product.deleteOne({ _id: id });
   return result;
