@@ -45,6 +45,10 @@ const BannerSchema = mongoose.Schema(
       type: String,
       default: "",
     },
+    status: {
+      type: String,
+      default: true,
+    },
   },
   {
     timestamps: true,

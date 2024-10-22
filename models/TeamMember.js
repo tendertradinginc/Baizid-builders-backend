@@ -30,7 +30,7 @@ const teamMemberSchema = new mongoose.Schema(
     },
     featuredStatus: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   {

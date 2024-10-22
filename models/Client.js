@@ -24,7 +24,7 @@ const clientSchema = mongoose.Schema(
     },
     featuredStatus: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   {
