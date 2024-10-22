@@ -38,6 +38,7 @@ exports.getAllCategoriesDashboardEdition = async (page, limit, search) => {
       limit: limitNumber,
       totalPages: Math.ceil(total / limitNumber),
     };
+    
 
     return { result, metadata };
   } catch (error) {
