@@ -10,19 +10,32 @@ exports.getAllProductsFromDb = async (page, limit, search = "", category) => {
   const categoryTerm = category == "undefined" ? "" : category;
   const regexSearch = new RegExp(searchTerm, "i");
 
-  let query = {};
-  if (searchTerm) {
-    query.$or = [
-      { name: { $regex: regexSearch } },
+  const query = {
+    $and: [
+      { category: { $regex: categoryTerm } },
+      {
+        $or: [
+              { name: { $regex: regexSearch } },
       { model: { $regex: regexSearch } },
       { brand: { $regex: regexSearch } },
-    ];
-  }
+        ],
+      },
+    ],
+  };
 
-   
-   if (categoryTerm) {
-    query.category = categoryTerm; 
-  }
+  // let query = {};
+  // if (searchTerm) {
+  //   query.$or = [
+  //     { name: { $regex: regexSearch } },
+  //     { model: { $regex: regexSearch } },
+  //     { brand: { $regex: regexSearch } },
+  //   ];
+  // }
+
+  
+  //  if (categoryTerm) {
+  //   query.category = categoryTerm; 
+  // }
 
   const result = await Product.find(query)
     .sort({ name: "asc" })
@@ -30,7 +43,6 @@ exports.getAllProductsFromDb = async (page, limit, search = "", category) => {
     .skip((parseInt(page) - 1) * parseInt(limit));
 
   const total = await Product.countDocuments(query);
-
   return { result, total };
 };
 
