@@ -20,6 +20,9 @@ const ServiceSchema = mongoose.Schema(
       },
       required: true,
     },
+    category: {
+      type: String,
+    },
 
     shortDescription: {
       type: String,
